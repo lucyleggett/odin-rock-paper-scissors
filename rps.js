@@ -16,19 +16,17 @@ Print message declaring the winner.
 Print humanScore and computerScore.
 */
 
-//Returns a value between 1 (inclusive) and 4 (exclusive) at random.
-
 let humanScore = 0;
 let computerScore = 0;
 
+//Returns a value between 1 (inclusive) and 4 (exclusive) at random.
 function getComputerChoice() {
     const minCeiled = Math.ceil(1);
     const maxFloored = Math.floor(4);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
 
-let computerChoice = getComputerChoice();
-
+//Human inputs a string in the prompt box, which then returns the value assigned to each option, from 1 to 3, or an error message.
 function getHumanChoice() {
     let humanChoice = prompt("Choose your weapon! Rock, Paper or Scissors?");
     if(humanChoice === "Rock") {
@@ -41,18 +39,21 @@ function getHumanChoice() {
         prompt("Oops! That's not an option. Please try again.")}
 }
 
+let computerChoice = getComputerChoice();
 let humanChoice = getHumanChoice();
 
-function scoring() {
-    if(humanChoice === computerChoice) {
-        // does nothing
-    } else if((computerChoice === 1 && humanChoice === 2) 
-        || (computerChoice === 2 && humanChoice === 3)
+function updateScores() {
+    if(humanChoice === computerChoice) {}
+        //Takes no action
+    else if((computerChoice === 1 && humanChoice === 2) 
+        || (computerChoice === 2 && humanChoice === 3) 
         || (computerChoice === 3 && humanChoice === 1)) {
             humanScore += 1;
-    } else if((computerChoice === 1 && humanChoice === 3)
-        || (computerChoice === 2 && humanChoice === 1)
+        }
+    else if((computerChoice === 1 && humanChoice === 3) 
+        || (computerChoice === 2 && humanChoice === 1) 
         || (computerChoice === 3 && humanChoice === 2)) {
-            computerScore += 1;}
+            computerScore += 1;
+        }
     }
 
