@@ -21,16 +21,29 @@ Print humanScore and computerScore.
 let humanScore = 0;
 let computerScore = 0;
 
-let computerChoice = getComputerChoice();
-
 function getComputerChoice() {
     const minCeiled = Math.ceil(1);
     const maxFloored = Math.floor(4);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
 
+let computerChoice = getComputerChoice();
+
 function getHumanChoice() {
     let humanChoice = prompt("Choose your weapon! Rock, Paper or Scissors?");
+    if(humanChoice === "Rock") {
+        return 1;}
+    else if(humanChoice === "Paper") {
+        return 2;}
+    else if(humanChoice === "Scissors") {
+        return 3;}
+    else {
+        prompt("Oops! That's not an option. Please try again.")}
+}
+
+let humanChoice = getHumanChoice();
+
+function scoring() {
     if(humanChoice === computerChoice) {
         // does nothing
     } else if((computerChoice === 1 && humanChoice === 2) 
@@ -42,3 +55,4 @@ function getHumanChoice() {
         || (computerChoice === 3 && humanChoice === 2)) {
             computerScore += 1;}
     }
+
