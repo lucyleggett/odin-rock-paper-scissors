@@ -25,13 +25,13 @@ function getComputerChoice() {
     let maxFloored = 4;
     let computerChoiceNum = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
     if(computerChoiceNum === 1){
-        return "rock";
+        return "Rock";
     }
     else if(computerChoiceNum === 2){
-        return "paper";
+        return "Paper";
     }
     else if(computerChoiceNum === 3){
-        return "scissors";
+        return "Scissors";
     }
 }
 
@@ -39,10 +39,30 @@ let computerChoice = getComputerChoice();
 
 //Returns the user's input
 function getHumanChoice() {
-    return prompt("Choose your weapon! Rock, Paper or Scissors?");
+    let humanChoice = prompt("Choose your weapon! Rock, Paper or Scissors?");
+    return humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
 }
 
-let humanChoice = getHumanChoice()
-
+let humanChoice = getHumanChoice();
 console.log(computerChoice);
 console.log(humanChoice);
+
+function playRound(humanChoice,computerChoice) {
+    if(humanChoice === computerChoice){
+        console.log(`It's a tie...You and the computer both chose ${humanChoice}.`);
+    }
+    else if((computerChoice === 1 && humanChoice === 2)
+    || (computerChoice === 2 && humanChoice === 3)
+    || (computerChoice === 3 && humanChoice === 1)){
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`),
+        humanScore += 1;
+        }
+    else if((computerChoice === 1 && humanChoice === 3)
+    || (computerChoice === 2 && humanChoice === 1)
+    || (computerChoice === 3 && humanChoice === 2)){
+        console.log(`Tough luck! ${computerChoice} beats ${humanChoice}.`),
+        computerScore += 1;
+    }
+}
+
+console.log(playRound(humanChoice,computerChoice));
