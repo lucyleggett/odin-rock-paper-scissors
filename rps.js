@@ -35,15 +35,15 @@ function getComputerChoice() {
     }
 }
 
-let computerChoice = getComputerChoice();
-
-//Returns the user's input
+//Returns the user's input amended to title case as standard.
 function getHumanChoice() {
     let humanChoice = prompt("Choose your weapon! Rock, Paper or Scissors?");
     return humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
 }
 
+let computerChoice = getComputerChoice();
 let humanChoice = getHumanChoice();
+
 console.log(computerChoice);
 console.log(humanChoice);
 
@@ -51,15 +51,15 @@ function playRound(humanChoice,computerChoice) {
     if(humanChoice === computerChoice){
         console.log(`It's a tie...You and the computer both chose ${humanChoice}.`);
     }
-    else if((computerChoice === 1 && humanChoice === 2)
-    || (computerChoice === 2 && humanChoice === 3)
-    || (computerChoice === 3 && humanChoice === 1)){
+    else if((computerChoice === "Rock" && humanChoice === "Paper")
+    || (computerChoice === "Paper" && humanChoice === "Scissors")
+    || (computerChoice === "Scissors" && humanChoice === "Rock")){
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`),
         humanScore += 1;
         }
-    else if((computerChoice === 1 && humanChoice === 3)
-    || (computerChoice === 2 && humanChoice === 1)
-    || (computerChoice === 3 && humanChoice === 2)){
+    else if((computerChoice === "Rock" && humanChoice === "Scissors")
+    || (computerChoice === "Paper" && humanChoice === "Rock")
+    || (computerChoice === "Scissors" && humanChoice === "Paper")){
         console.log(`Tough luck! ${computerChoice} beats ${humanChoice}.`),
         computerScore += 1;
     }
