@@ -41,28 +41,68 @@ function getHumanChoice() {
     return humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
 }
 
-let computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
-
-console.log(computerChoice);
-console.log(humanChoice);
-
 function playRound(humanChoice,computerChoice) {
     if(humanChoice === computerChoice){
-        console.log(`It's a tie...You and the computer both chose ${humanChoice}.`);
+        console.log(`The computer played ${computerChoice}.`),
+        console.log(`You played ${humanChoice}.`),
+        console.log(`It's a tie...`);
+        console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
     }
     else if((computerChoice === "Rock" && humanChoice === "Paper")
     || (computerChoice === "Paper" && humanChoice === "Scissors")
     || (computerChoice === "Scissors" && humanChoice === "Rock")){
+        humanScore += 1,
+        console.log(`The computer played ${computerChoice}.`),
+        console.log(`You played ${humanChoice}.`),
         console.log(`You win! ${humanChoice} beats ${computerChoice}.`),
-        humanScore += 1;
+        console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
         }
     else if((computerChoice === "Rock" && humanChoice === "Scissors")
     || (computerChoice === "Paper" && humanChoice === "Rock")
     || (computerChoice === "Scissors" && humanChoice === "Paper")){
+        computerScore += 1,
+        console.log(`The computer played ${computerChoice}.`),
+        console.log(`You played ${humanChoice}.`),
         console.log(`Tough luck! ${computerChoice} beats ${humanChoice}.`),
-        computerScore += 1;
+        console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
     }
 }
 
-console.log(playRound(humanChoice,computerChoice));
+function playGame(){
+    //Round 1
+    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanChoice();
+    playRound(humanChoice,computerChoice);
+
+    //Round 2
+    computerChoice = getComputerChoice();
+    humanChoice = getHumanChoice();
+    playRound(humanChoice,computerChoice);
+
+    //Round 3
+    computerChoice = getComputerChoice();
+    humanChoice = getHumanChoice();
+    playRound(humanChoice,computerChoice);
+
+    //Round 4
+    computerChoice = getComputerChoice();
+    humanChoice = getHumanChoice();
+    playRound(humanChoice,computerChoice);
+
+    //Round 5
+    computerChoice = getComputerChoice();
+    humanChoice = getHumanChoice();
+    playRound(humanChoice,computerChoice);
+    
+    //Works out who is the winner
+    if(humanScore > computerScore){
+        victoryMessage = "Congratulations! You won!";
+    } else {
+        victoryMessage = "Tough luck! The computer won.";
+    }
+
+    //Announces the winner
+    console.log(`Final scores are ${humanScore} to you and ${computerScore} to the computer. ${victoryMessage}`)
+}
+
+playGame();
