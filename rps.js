@@ -39,21 +39,21 @@ function getHumanChoice() {
         prompt("Oops! That's not an option. Please try again.")}
 }
 
-let computerChoice = getComputerChoice();
 let humanChoice = getHumanChoice();
+let computerChoice = getComputerChoice();
 
-function updateScores() {
-    if(humanChoice === computerChoice) {}
-        //Takes no action
-    else if((computerChoice === 1 && humanChoice === 2) 
-        || (computerChoice === 2 && humanChoice === 3) 
-        || (computerChoice === 3 && humanChoice === 1)) {
-            humanScore += 1;
-        }
-    else if((computerChoice === 1 && humanChoice === 3) 
-        || (computerChoice === 2 && humanChoice === 1) 
-        || (computerChoice === 3 && humanChoice === 2)) {
-            computerScore += 1;
-        }
+function playRound(humanChoice, computerChoice) {
+    if (computerChoice === humanChoice){
+        console.log(`It's a tie... You and the computer both chose ${humanChoice}.`)
     }
-
+    else if((computerChoice === 1 && humanChoice === 2)
+        || (computerChoice === 2 && humanChoice === 3)
+        || (computerChoice === 3 && humanChoice === 1)) {
+            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        }
+    else if((computerChoice === 1 && humanChoice === 3)
+        || (computerChoice === 2 && humanChoice === 1)
+        || (computerChoice === 3 && humanChoice === 2)) {
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        }
+}
