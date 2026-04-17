@@ -21,39 +21,28 @@ let computerScore = 0;
 
 //Returns a value between 1 (inclusive) and 4 (exclusive) at random.
 function getComputerChoice() {
-    const minCeiled = Math.ceil(1);
-    const maxFloored = Math.floor(4);
-    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+    let minCeiled = 1;
+    let maxFloored = 4;
+    let computerChoiceNum = Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+    if(computerChoiceNum === 1){
+        return "rock";
+    }
+    else if(computerChoiceNum === 2){
+        return "paper";
+    }
+    else if(computerChoiceNum === 3){
+        return "scissors";
+    }
 }
 
-//Human inputs a string in the prompt box, which then returns the value assigned to each option, from 1 to 3, or an error message.
-function getHumanChoice() {
-    let humanChoice = prompt("Choose your weapon! Rock, Paper or Scissors?");
-    if(humanChoice === "Rock") {
-        return 1;}
-    else if(humanChoice === "Paper") {
-        return 2;}
-    else if(humanChoice === "Scissors") {
-        return 3;}
-    else {
-        prompt("Oops! That's not an option. Please try again.")}
-}
-
-let humanChoice = getHumanChoice();
 let computerChoice = getComputerChoice();
 
-function playRound(humanChoice, computerChoice) {
-    if (computerChoice === humanChoice){
-        console.log(`It's a tie... You and the computer both chose ${humanChoice}.`)
-    }
-    else if((computerChoice === 1 && humanChoice === 2)
-        || (computerChoice === 2 && humanChoice === 3)
-        || (computerChoice === 3 && humanChoice === 1)) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-        }
-    else if((computerChoice === 1 && humanChoice === 3)
-        || (computerChoice === 2 && humanChoice === 1)
-        || (computerChoice === 3 && humanChoice === 2)) {
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-        }
+//Returns the user's input
+function getHumanChoice() {
+    return prompt("Choose your weapon! Rock, Paper or Scissors?");
 }
+
+let humanChoice = getHumanChoice()
+
+console.log(computerChoice);
+console.log(humanChoice);
