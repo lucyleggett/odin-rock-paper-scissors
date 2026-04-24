@@ -80,7 +80,7 @@ function playRound(humanChoice,computerChoice) {
         || (computerChoice === "Paper" && humanChoice === "Rock")
         || (computerChoice === "Scissors" && humanChoice === "Paper")){
             computerScore += 1;
-            roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}.`
+            roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. Tough luck, the computer wins!`
         }
         const scores = document.createElement("p");
         scores.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
@@ -90,6 +90,6 @@ function playRound(humanChoice,computerChoice) {
     else {
         const finalScores = document.createElement("h2");
         finalScores.textContent = `Five rounds well played!\nFinal scores are ${humanScore} to you and ${computerScore} to the computer.`;
-        scores.appendChild(finalScores);
+        roundResult.appendChild(finalScores);
     }
 }
