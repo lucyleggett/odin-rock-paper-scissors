@@ -108,8 +108,6 @@ function playRound(humanChoice,computerChoice) {
 function endGame() {
     const finalScores = document.createElement("p");
     const finalResults = document.querySelector(".results")
-    finalScores.classList.add = "finalResult"
-    finalScores.style.whiteSpace = "pre-line";
     if (humanScore > computerScore) {
         finalScores.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
     }
@@ -120,6 +118,7 @@ function endGame() {
         finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
     }
     finalResults.appendChild(finalScores);
+    finalScores.className = "finalResult";
     rockButton.removeEventListener("click", playRock);
     paperButton.removeEventListener("click", playPaper);
     scissorsButton.removeEventListener("click", playScissors);
