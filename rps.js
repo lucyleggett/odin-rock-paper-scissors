@@ -85,10 +85,24 @@ function playRound(humanChoice,computerChoice) {
         computerScore += 1;
         roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. Tough luck, the computer wins!`
     }
-    const scores = document.createElement("p");
-    scores.style.whiteSpace = "pre-line";
-    scores.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
-    roundResult.appendChild(scores);
+    const humanTally = document.createElement("p");
+    const computerTally = document.createElement("p");
+    humanTally.textContent = `Your score: ${humanScore}`;
+    computerTally.textContent = `Computer score: ${computerScore}`;
+    if (humanScore > computerScore) {
+        humanTally.style.color = "green";
+        computerTally.style.color = "red";
+    }
+    else if (computerScore > humanScore) {
+        humanTally.style.color = "red";
+        computerTally.style.color = "green";
+    }
+    else {
+        humanTally.style.color = "orange";
+        computerTally.style.color = "orange";
+    }
+    roundResult.appendChild(humanTally);
+    roundResult.appendChild(computerTally);
     getComputerChoice();
 }
 
@@ -98,8 +112,11 @@ function endGame() {
     if (humanScore > computerScore) {
         finalScores.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
     }
-    else if (computerScore < humanScore) {
+    else if (computerScore > humanScore) {
         finalScores.textContent = `The computer said to tell you you're a dumb dumb loser...`;
+    }
+    else {
+        finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
     }
     results.appendChild(finalScores);
     rockButton.removeEventListener("click", playRock);
