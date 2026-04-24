@@ -68,41 +68,57 @@ function playRound(humanChoice,computerChoice) {
     }
 }
 
-function playGame(){
-    //Round 1
-    let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
-    playRound(humanChoice,computerChoice);
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
 
-    //Round 2
-    computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
-    playRound(humanChoice,computerChoice);
+rockButton.addEventListener("click",() => {
+    return humanChoice = "Rock";
+})
 
-    //Round 3
-    computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
-    playRound(humanChoice,computerChoice);
+paperButton.addEventListener("click",() => {
+    return humanChoice = "Paper";
+})
 
-    //Round 4
-    computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
-    playRound(humanChoice,computerChoice);
+scissorsButton.addEventListener("click",() => {
+    return humanChoice = "Scissors";
+})
 
-    //Round 5
-    computerChoice = getComputerChoice();
-    humanChoice = getHumanChoice();
-    playRound(humanChoice,computerChoice);
+// function playGame(){
+//     //Round 1
+//     let computerChoice = getComputerChoice();
+//     let humanChoice = getHumanChoice();
+//     playRound(humanChoice,computerChoice);
+
+//     //Round 2
+//     computerChoice = getComputerChoice();
+//     humanChoice = getHumanChoice();
+//     playRound(humanChoice,computerChoice);
+
+//     //Round 3
+//     computerChoice = getComputerChoice();
+//     humanChoice = getHumanChoice();
+//     playRound(humanChoice,computerChoice);
+
+//     //Round 4
+//     computerChoice = getComputerChoice();
+//     humanChoice = getHumanChoice();
+//     playRound(humanChoice,computerChoice);
+
+//     //Round 5
+//     computerChoice = getComputerChoice();
+//     humanChoice = getHumanChoice();
+//     playRound(humanChoice,computerChoice);
     
-    //Works out who is the winner
-    if(humanScore > computerScore){
-        victoryMessage = "Congratulations! You won!";
-    } else {
-        victoryMessage = "Tough luck! The computer won.";
-    }
+//     //Works out who is the winner
+//     if(humanScore > computerScore){
+//         victoryMessage = "Congratulations! You won!";
+//     } else {
+//         victoryMessage = "Tough luck! The computer won.";
+//     }
 
-    //Announces the winner
-    console.log(`Final scores are ${humanScore} to you and ${computerScore} to the computer. ${victoryMessage}`)
-}
+//     //Announces the winner
+//     console.log(`Final scores are ${humanScore} to you and ${computerScore} to the computer. ${victoryMessage}`)
+// }
 
-playGame();
+// playGame();
