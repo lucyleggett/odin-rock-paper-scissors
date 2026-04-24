@@ -2,30 +2,47 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+p {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.mega {
+    display: flex;
+    justify-content: center;
+}
+
 .master {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 50px;
+    margin: 20px;
+    border-style: outset;
+    border-width: 3px;
+    width: 800px;
 }
 
 .button-container {
     display: flex;
     justify-content: space-around;
-    max-width: 300px;
-    margin-bottom: 20px;
+    max-width: 500px;
+    margin: 20px;
 }
 
-.results {
-    display: flex;
+.finalResult {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 h1 {
     text-align: center;
+    margin: 0;
 }
 
 button {
+    width: 100px;
     padding: 10px;
     margin: 10px;
 }
