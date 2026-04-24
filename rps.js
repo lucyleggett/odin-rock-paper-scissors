@@ -66,6 +66,7 @@ function getComputerChoice() {
 
 function playRound(humanChoice,computerChoice) {
     const roundResult = document.querySelector("#results");
+    roundResult.style.whiteSpace = "pre-line";
     if (roundCount < 5) {
         if(humanChoice === computerChoice){
             roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. It's a tie...`;
@@ -83,12 +84,14 @@ function playRound(humanChoice,computerChoice) {
             roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. Tough luck, the computer wins!`
         }
         const scores = document.createElement("p");
+        scores.style.whiteSpace = "pre-line";
         scores.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
         roundResult.appendChild(scores);
         getComputerChoice();
     } 
     else {
         const finalScores = document.createElement("h2");
+        finalScores.style.whiteSpace = "pre-line";
         finalScores.textContent = `Five rounds well played!\nFinal scores are ${humanScore} to you and ${computerScore} to the computer.`;
         roundResult.appendChild(finalScores);
     }
