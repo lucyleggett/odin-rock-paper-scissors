@@ -83,12 +83,12 @@ function domController() {
         const choiceMap = [null, "Rock", "Paper", "Scissors"];
         [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
         const roundResult = document.querySelector(".results");
-        roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`
+        roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`;
     }
 
     const printGameWinner = (scoreCount) => {
         const scoreAnnouncement = document.createElement("p");
-        const finalResults = document.querySelector(".results")
+        const finalResults = document.querySelector(".results");
         if(scoreCount[0] > scoreCount[1]) {
             finalResults.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
         } else if(scoreCount[1] > scoreCount[0]) {
@@ -104,44 +104,7 @@ function domController() {
         humanTally.textContent = `Your score: ${humanScore}`;
         computerTally.textContent = `Computer score: ${computerScore}`;
         }
-    }
 
     return { getHumanInput, printRoundWinner, printGameWinner, printScores }
-}
 
-/*
-Create global variables humanScore and computerScore with initial value of 0.
-Create variables "Rock", "Paper" and "Scissors" and assign them the values 1, 2 and 3 respectively.
-Create function getComputerChoice to generate a random integer between 1 and 3.
-Create function getHumanChoice to receive input as "Rock", "Paper" or "Scissors", or else return an error message. 
-Define winning logic:
-    If computerChoice === 1 and humanChoice === 2, humanScore +1
-    If computerChoice === 1 and humanChoice === 3, computerScore +1
-    If computerChoice === 2 and humanChoice === 1, computerScore +1
-    If computerChoice === 2 and humanChoice === 3, humanScore +1
-    If computerChoice === 3 and humanChoice === 1, humanScore +1
-    If computerChoice === 3 and humanChoice === 2, computerScore +1
-    Else if computerChoice === humanChoice, return nothing
-Print humanChoice and computerChoice.
-Print message declaring the winner.
-Print humanScore and computerScore.
-*/
-
-function endGame() {
-    const finalScores = document.createElement("p");
-    const finalResults = document.querySelector(".results")
-    if (humanScore > computerScore) {
-        finalScores.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
-    }
-    else if (computerScore > humanScore) {
-        finalScores.textContent = `The computer said to tell you you're a dumb dumb loser...`;
-    }
-    else {
-        finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
-    }
-    finalResults.appendChild(finalScores);
-    finalScores.className = "finalResult";
-    rockButton.removeEventListener("click", playRock);
-    paperButton.removeEventListener("click", playPaper);
-    scissorsButton.removeEventListener("click", playScissors);
 }
