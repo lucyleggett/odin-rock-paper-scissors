@@ -36,18 +36,37 @@ function playGame() {
     const playRound = (computerChoice, humanChoice) => {
         let roundWinner;
         if(humanChoice === computerChoice){
-            roundWinner = "tie";
+            roundWinner = "nobody";
         } else if((computerChoice === 1 && humanChoice === 2)
         || (computerChoice === 2 && humanChoice === 3)
         || (computerChoice === 3 && humanChoice === 1)){
-            roundWinner = "human";
+            roundWinner = "you";
         } else if((computerChoice === 1 && humanChoice === 3)
         || (computerChoice === 2 && humanChoice === 1)
         || (computerChoice === 3 && humanChoice === 2)){
-            roundWinner = "computer";
+            roundWinner = "the computer";
         }
         roundCount();
     }
+}
+
+function updateDOM() {
+    const printRoundWinner = (roundWinner) => {
+        const roundResult = document.querySelector(".results");
+        roundResult.textContent = `This round goes to ${roundWinner}!`
+    }
+
+    const printGameWinner = (gameWinner) => {
+        const scoreAnnouncement = document.createElement("p");
+        const finalResults = document.querySelector(".results")
+        if(gameWinner = "human") {
+            finalResults.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
+        } else if(gameWinner = "computer") {
+            finalResults.textContent = `The computer said to tell you you're a dumb dumb loser...`
+        } else if(gameWinner = "tie") {
+            finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
+        }
+    } 
 }
 
 /*
