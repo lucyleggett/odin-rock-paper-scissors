@@ -51,9 +51,11 @@ function playGame() {
 }
 
 function updateDOM() {
-    const printRoundWinner = (roundWinner) => {
+    const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
+        const choiceMap = [null, "Rock", "Paper", "Scissors"];
+        [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
         const roundResult = document.querySelector(".results");
-        roundResult.textContent = `This round goes to ${roundWinner}!`
+        roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}!`
     }
 
     const printGameWinner = (gameWinner) => {
