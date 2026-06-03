@@ -28,23 +28,32 @@ function gameController() {
     
     const roundCount = () => { roundCount += 1; };
 
-    return { computerChoice, humanChoice, roundCount };
-
+    const scoreCount = (roundWinner) => {
+        if (roundWinner === "nobody...") return;
+        else if (roundWinner === "you!") {
+            humanScore += 1;
+        } else {
+            computerScore += 1;
+        }
+        return [humanScore, computerScore];
     }
+
+    return { computerChoice, humanChoice, roundCount, scoreCount };
+}
 
 function playGame() {
     const playRound = (computerChoice, humanChoice) => {
         let roundWinner;
         if(humanChoice === computerChoice){
-            roundWinner = "nobody";
+            roundWinner = "nobody...";
         } else if((computerChoice === 1 && humanChoice === 2)
         || (computerChoice === 2 && humanChoice === 3)
         || (computerChoice === 3 && humanChoice === 1)){
-            roundWinner = "you";
+            roundWinner = "ç";
         } else if((computerChoice === 1 && humanChoice === 3)
         || (computerChoice === 2 && humanChoice === 1)
         || (computerChoice === 3 && humanChoice === 2)){
-            roundWinner = "the computer";
+            roundWinner = "the computer.";
         }
         roundCount();
     }
@@ -55,7 +64,7 @@ function updateDOM() {
         const choiceMap = [null, "Rock", "Paper", "Scissors"];
         [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
         const roundResult = document.querySelector(".results");
-        roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}!`
+        roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`
     }
 
     const printGameWinner = (gameWinner) => {
@@ -67,6 +76,13 @@ function updateDOM() {
             finalResults.textContent = `The computer said to tell you you're a dumb dumb loser...`
         } else if(gameWinner = "tie") {
             finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
+        }
+
+    const printScores = () => {
+        const humanTally = document.createElement("p");
+        const computerTally = document.createElement("p");
+        humanTally.textContent = `Your score: ${humanScore}`;
+        computerTally.textContent = `Computer score: ${computerScore}`;
         }
     } 
 }
