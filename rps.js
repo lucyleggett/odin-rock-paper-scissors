@@ -1,3 +1,21 @@
+/* 
+Create function gameController, and within that:
+- getComputerChoice, to record the computer's rps choice
+- getHumanChoice, to record the player's rps choice
+- countRounds, to track the number of turns taken and end the game after 5 rounds
+- keepScore, to track points gained
+Return all functions
+
+Create function game, and within that:
+- playRound, which will call the gameController functions
+
+Create updateDOM to manage the UI
+*/
+
+function gameController() {
+    
+}
+
 /*
 Create global variables humanScore and computerScore with initial value of 0.
 Create variables "Rock", "Paper" and "Scissors" and assign them the values 1, 2 and 3 respectively.
