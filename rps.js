@@ -1,5 +1,6 @@
 /* 
 Create function gameController, and within that:
+- initialise score variables
 - getComputerChoice, to record the computer's rps choice
 - getHumanChoice, to record the player's rps choice
 - countRounds, to track the number of turns taken and end the game after 5 rounds
@@ -13,7 +14,40 @@ Create updateDOM to manage the UI
 */
 
 function gameController() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    const computerChoice = () => {
+        let computerChoiceNum = Math.floor(Math.random() * (4 - 1) + 1);
+        // if(computerChoiceNum === 1) return "Rock";
+        // if(computerChoiceNum === 2) return "Paper";
+        // if(computerChoiceNum === 3) return "Scissors";
+        }
     
+    const humanChoice = (humanInput) => {}
+    
+    const roundCount = () => { roundCount += 1; };
+
+    return { computerChoice, humanChoice, roundCount };
+
+    }
+
+function playGame() {
+    const playRound = (computerChoice, humanChoice) => {
+        let roundWinner;
+        if(humanChoice === computerChoice){
+            roundWinner = "tie";
+        } else if((computerChoice === 1 && humanChoice === 2)
+        || (computerChoice === 2 && humanChoice === 3)
+        || (computerChoice === 3 && humanChoice === 1)){
+            roundWinner = "human";
+        } else if((computerChoice === 1 && humanChoice === 3)
+        || (computerChoice === 2 && humanChoice === 1)
+        || (computerChoice === 3 && humanChoice === 2)){
+            roundWinner = "computer";
+        }
+        roundCount();
+    }
 }
 
 /*
