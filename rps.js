@@ -24,7 +24,7 @@ function Score() {
         const specificScore = specificPlayer.score;
     };
 
-    const awardPoint = (roundWinner) => {
+    const awardPoint = () => {
         if (roundWinner === "nobody...") return;
         else if (roundWinner === "you!") {
             getScore(human);
@@ -34,23 +34,32 @@ function Score() {
             computer.score += 1;
         }
     }
+
+    return { getScore, awardPoint };
 }
 
 function GameController() {
-    let roundWinner;
-    const getRoundWinner = () => roundWinner;
-
     const getComputerChoice = () => {
-        let computerChoice = Math.floor(Math.random() * (4 - 1) + 1);
+        return Math.floor(Math.random() * (4 - 1) + 1);
         }
     
-    const roundCount = () => { 
+    let roundCount;
+    const getRoundCount = () => { roundCount };
+
+    const incrementRoundCount = () => { 
+        getRoundCount();
         roundCount += 1;
         return roundCount === 5;
     };
 
-    const playRound = (computerChoice, humanChoice) => {
-        getRoundWinner();
+    let roundWinner;
+    const getRoundWinner = () => roundWinner;
+
+    const playRound = () => {
+        const humanChoice = getHumanInput();
+        const computerChoice = getComputerChoice();
+        let roundWinner;
+
         if(humanChoice === computerChoice){
             roundWinner = "nobody...";
         } else if((computerChoice === 1 && humanChoice === 2)
@@ -62,8 +71,8 @@ function GameController() {
         || (computerChoice === 3 && humanChoice === 2)){
             roundWinner = "the computer.";
         }
-        roundCount();
-        Score(roundWinner);
+        incrementRoundCount();
+        roundWinner.awardPoint();
         printRoundWinner(computerChoice, humanChoice, roundWinner);
         printScores(humanScore, computerScore);
 
@@ -71,15 +80,14 @@ function GameController() {
             printGameWinner(scoreCount);
         }
 
-        return {}
+        return { getRoundCount, }
     }
 
-    return { GetRoundWinner, getComputerChoice, getHumanChoice, roundCount, scoreCount };
+    return {  };
 }
 
-function domController() {
-
-    const getHumanInput = (roundCount) => {
+function DomController() {
+    const getHumanInput = () => {
         if (!roundCount()){
             const rpsButtons = document.querySelectorAll(".rps");
             const controller = new AbortController();
@@ -124,4 +132,4 @@ function domController() {
 
 }
 
-const game = 
+const game = GameController();
