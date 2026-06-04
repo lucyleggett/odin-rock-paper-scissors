@@ -24,15 +24,10 @@ function Score() {
         return specificPlayer.score;
     };
 
-    const awardPoint = () => {
+    const awardPoint = (roundWinner) => {
         if (roundWinner === "nobody...") return;
-        else if (roundWinner === "you!") {
-            getScore(human);
-            human.score += 1;
-        } else {
-            getScore(computer);
-            computer.score += 1;
-        }
+        else if (roundWinner === "you!") players[0].score =+ 1;
+        else players[1].score += 1;
     }
     return { getScore, awardPoint };
 }
@@ -48,7 +43,7 @@ function Round() {
 
 function GameController() {
     const round = Round();
-    const roundWinner = Score();
+    const score = Score();
     const rpsButtons = document.querySelectorAll(".rps");
     const controller = new AbortController();
 
@@ -68,6 +63,7 @@ function GameController() {
     }
 
     const playRound = (humanChoice) => {
+        let roundWinner;
         const computerChoice = getComputerChoice();
 
         if(humanChoice === computerChoice){
@@ -82,7 +78,7 @@ function GameController() {
             roundWinner = "the computer.";
         }
         round.incrementCount();
-        roundWinner.awardPoint();
+        score.awardPoint();
         printRoundWinner(computerChoice, humanChoice, roundWinner);
         printScores();
 
