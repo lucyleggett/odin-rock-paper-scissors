@@ -38,37 +38,40 @@ function Score() {
     return { getScore, awardPoint };
 }
 
-function GameController() {
-    const getComputerChoice = () => {
-        return Math.floor(Math.random() * (4 - 1) + 1);
-        }
-    
-    let roundCount;
-    const getRoundCount = () => { roundCount };
+function Round() {
+    let roundCount = 0;
+    const getCount = () => { roundCount };
 
-    const incrementRoundCount = () => { 
+    const incrementCount = () => { 
         getRoundCount();
         roundCount += 1;
     };
+}
 
-    let roundWinner;
-    const getRoundWinner = () => roundWinner;
-
-    if (getRoundCount() < 5){
+function GameController() {
+    const round = Round();
+    const roundCount = round.getCount();
+    const roundWinner = Score();
+    
+    if (roundCount < 5){
         const rpsButtons = document.querySelectorAll(".rps");
         const controller = new AbortController();
         rpsButtons.forEach(button => {
             button.addEventListener("click", (event) => {
                 let humanChoice = event.target.id;
+                playRound(humanChoice);
             }, { signal: controller.signal });
         })
     } else {
         controller.abort();
     }
 
+    const getComputerChoice = () => {
+        return Math.floor(Math.random() * (4 - 1) + 1);
+        }
+
     const playRound = (humanChoice) => {
         const computerChoice = getComputerChoice();
-        let roundWinner;
 
         if(humanChoice === computerChoice){
             roundWinner = "nobody...";
@@ -81,19 +84,15 @@ function GameController() {
         || (computerChoice === 3 && humanChoice === 2)){
             roundWinner = "the computer.";
         }
-        incrementRoundCount();
+        round.incrementCount();
         roundWinner.awardPoint();
         printRoundWinner(computerChoice, humanChoice, roundWinner);
-        printScores(humanScore, computerScore);
+        printScores();
 
-        if (roundCount()) {
-            printGameWinner(scoreCount);
+        if (roundCount === 5) {
+            printGameWinner();
         }
-
-        return { getRoundCount, }
-    }
-
-    return {  };
+    };
 }
 
 function DomController() {
@@ -131,7 +130,7 @@ function DomController() {
         computerTally.textContent = `Computer score: ${computerScore}`;
         }
 
-    return { getHumanInput, printRoundWinner, printGameWinner, printScores }
+    return { printRoundWinner, printGameWinner, printScores };
 
 }
 
