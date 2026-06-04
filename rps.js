@@ -48,12 +48,11 @@ function Round() {
 
 function GameController() {
     const round = Round();
-    const roundCount = round.getCount();
     const roundWinner = Score();
     const rpsButtons = document.querySelectorAll(".rps");
     const controller = new AbortController();
 
-    if (roundCount < 5){
+    if (round.getCount() < 5){
         rpsButtons.forEach(button => {
             button.addEventListener("click", (event) => {
                 let humanChoice = event.target.id;
@@ -87,7 +86,7 @@ function GameController() {
         printRoundWinner(computerChoice, humanChoice, roundWinner);
         printScores();
 
-        if (roundCount === 5) {
+        if (round.getCount() === 5) {
             printGameWinner();
         }
     };
