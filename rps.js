@@ -46,7 +46,6 @@ function GameController() {
     const round = Round();
     const score = Score();
     const rpsButtons = document.querySelectorAll(".rps");
-    const controller = new AbortController();
 
     rpsButtons.forEach(button => {
         button.addEventListener("click", (event) => {
@@ -63,7 +62,6 @@ function GameController() {
 
     const playRound = (humanChoice) => {
         if (round.getCount() >= 5) return;
-
         let roundWinner;
         const computerChoice = getComputerChoice();
 
@@ -82,7 +80,6 @@ function GameController() {
         score.awardPoint(roundWinner);
         dom.printRoundWinner(computerChoice, humanChoice, roundWinner);
         dom.printScores();
-
         if (round.getCount() === 5) {
             dom.printGameWinner();
         }
@@ -90,14 +87,16 @@ function GameController() {
 }
 
 function DomController() {
+    const score = Score();
+
     const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
         const roundResult = document.querySelector(".results");
         roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`;
     }
 
     const printGameWinner = () => {
-        const humanScore = getScore(human);
-        const computerScore = getScore(computer);
+        const humanScore = getScore("human");
+        const computerScore = getScore("computer");
 
         const scoreAnnouncement = document.createElement("p");
         const finalResults = document.querySelector(".results");
