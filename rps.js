@@ -20,8 +20,8 @@ function Score() {
     ]
 
     const getScore = (player) => { 
-        const specificPlayer = players.find(player => player.name === player);
-        const specificScore = specificPlayer.score;
+        const specificPlayer = players.find(p => p.name === player);
+        return specificPlayer.score;
     };
 
     const awardPoint = () => {
@@ -54,9 +54,9 @@ function GameController() {
     const round = Round();
     const roundCount = round.getCount();
     const roundWinner = Score();
-
     const rpsButtons = document.querySelectorAll(".rps");
     const controller = new AbortController();
+
     if (roundCount < 5){
         rpsButtons.forEach(button => {
             button.addEventListener("click", (event) => {
@@ -70,7 +70,7 @@ function GameController() {
 
     const getComputerChoice = () => {
         return Math.floor(Math.random() * (4 - 1) + 1);
-        }
+    }
 
     const playRound = (humanChoice) => {
         const computerChoice = getComputerChoice();
