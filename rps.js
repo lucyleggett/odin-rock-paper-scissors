@@ -57,7 +57,7 @@ function GameController() {
     const getComputerChoice = () => {
         const computerChoiceNum = Math.floor(Math.random() * (4 - 1) + 1);
         const choiceMap = [null, "Rock", "Paper", "Scissors"];
-        return [choiceMap[computerChoiceNum]];
+        return [choiceMap[computerChoiceNum]][0];
     }
 
     const playRound = (humanChoice) => {
