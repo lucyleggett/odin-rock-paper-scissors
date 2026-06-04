@@ -98,8 +98,7 @@ function DomController() {
         const humanScore = getScore("human");
         const computerScore = getScore("computer");
 
-        const scoreAnnouncement = document.createElement("p");
-        const finalResults = document.querySelector(".results");
+        const finalResults = document.querySelector(".final-results");
 
         if(humanScore > computerScore) {
             finalResults.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
@@ -119,7 +118,6 @@ function DomController() {
         }
 
     return { printRoundWinner, printGameWinner, printScores };
-
 }
 
 const game = GameController();
