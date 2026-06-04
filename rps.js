@@ -48,16 +48,12 @@ function GameController() {
     const rpsButtons = document.querySelectorAll(".rps");
     const controller = new AbortController();
 
-    if (round.getCount() < 5){
-        rpsButtons.forEach(button => {
-            button.addEventListener("click", (event) => {
-                let humanChoice = event.target.innerText;
-                playRound(humanChoice);
-            }, { signal: controller.signal });
-        })
-    } else {
-        controller.abort();
-    };
+    rpsButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            let humanChoice = event.target.innerText;
+            playRound(humanChoice);
+        });
+    });
 
     const getComputerChoice = () => {
         const computerChoiceNum = Math.floor(Math.random() * (4 - 1) + 1);
@@ -66,6 +62,8 @@ function GameController() {
     }
 
     const playRound = (humanChoice) => {
+        if (round.getCount() >= 5) return;
+
         let roundWinner;
         const computerChoice = getComputerChoice();
 
@@ -81,12 +79,12 @@ function GameController() {
             roundWinner = "the computer.";
         }
         round.incrementCount();
-        score.awardPoint();
+        score.awardPoint(roundWinner);
         dom.printRoundWinner(computerChoice, humanChoice, roundWinner);
         dom.printScores();
 
         if (round.getCount() === 5) {
-            printGameWinner();
+            dom.printGameWinner();
         }
     };
 }
@@ -109,7 +107,7 @@ function DomController() {
         } else if(computerScore > humanScore) {
             finalResults.textContent = `The computer said to tell you you're a dumb dumb loser...`
         } else {
-            finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
+            finalResults.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
         }
     }
 
