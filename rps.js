@@ -34,18 +34,14 @@ function Score() {
             computer.score += 1;
         }
     }
-
     return { getScore, awardPoint };
 }
 
 function Round() {
     let roundCount = 0;
-    const getCount = () => { roundCount };
+    const getCount = () => roundCount;
 
-    const incrementCount = () => { 
-        getRoundCount();
-        roundCount += 1;
-    };
+    const incrementCount = () => { roundCount += 1; };
 
     return { getCount, incrementCount };
 }
