@@ -42,6 +42,7 @@ function Round() {
 }
 
 function GameController() {
+    const dom = DomController();
     const round = Round();
     const score = Score();
     const rpsButtons = document.querySelectorAll(".rps");
@@ -50,7 +51,7 @@ function GameController() {
     if (round.getCount() < 5){
         rpsButtons.forEach(button => {
             button.addEventListener("click", (event) => {
-                let humanChoice = event.target.id;
+                let humanChoice = event.target.innerText;
                 playRound(humanChoice);
             }, { signal: controller.signal });
         })
@@ -59,7 +60,9 @@ function GameController() {
     };
 
     const getComputerChoice = () => {
-        return Math.floor(Math.random() * (4 - 1) + 1);
+        const computerChoiceNum = Math.floor(Math.random() * (4 - 1) + 1);
+        const choiceMap = [null, "Rock", "Paper", "Scissors"];
+        return [choiceMap[computerChoiceNum]];
     }
 
     const playRound = (humanChoice) => {
@@ -68,19 +71,19 @@ function GameController() {
 
         if(humanChoice === computerChoice){
             roundWinner = "nobody...";
-        } else if((computerChoice === 1 && humanChoice === 2)
-        || (computerChoice === 2 && humanChoice === 3)
-        || (computerChoice === 3 && humanChoice === 1)){
+        } else if((computerChoice === "Rock" && humanChoice === "Paper")
+        || (computerChoice === "Paper" && humanChoice === "Scissors")
+        || (computerChoice === "Scissors" && humanChoice === "Rock")){
             roundWinner = "you!";
-        } else if((computerChoice === 1 && humanChoice === 3)
-        || (computerChoice === 2 && humanChoice === 1)
-        || (computerChoice === 3 && humanChoice === 2)){
+        } else if((computerChoice === "Rock" && humanChoice === "Scissors")
+        || (computerChoice === "Paper" && humanChoice === "Rock")
+        || (computerChoice === "Scissors" && humanChoice === "Paper")){
             roundWinner = "the computer.";
         }
         round.incrementCount();
         score.awardPoint();
-        printRoundWinner(computerChoice, humanChoice, roundWinner);
-        printScores();
+        dom.printRoundWinner(computerChoice, humanChoice, roundWinner);
+        dom.printScores();
 
         if (round.getCount() === 5) {
             printGameWinner();
@@ -90,8 +93,6 @@ function GameController() {
 
 function DomController() {
     const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
-        const choiceMap = [null, "Rock", "Paper", "Scissors"];
-        [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
         const roundResult = document.querySelector(".results");
         roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`;
     }
@@ -113,14 +114,11 @@ function DomController() {
     }
 
     const printScores = () => {
-        const humanScore = getScore(human);
-        const computerScore = getScore(computer);
+        const humanScore = score.getScore("human");
+        const computerScore = score.getScore("computer");
+        const tally = document.querySelector(".tally");
 
-        const humanTally = document.createElement("p");
-        const computerTally = document.createElement("p");
-
-        humanTally.textContent = `Your score: ${humanScore}`;
-        computerTally.textContent = `Computer score: ${computerScore}`;
+        tally.textContent = `Your score: ${humanScore} | Computer score: ${computerScore}`;
         }
 
     return { printRoundWinner, printGameWinner, printScores };
