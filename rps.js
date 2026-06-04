@@ -102,28 +102,36 @@ function DomController() {
         }
     }
     
-    const printRoundWinner = (getComputerChoice, getHumanChoice, roundWinner) => {
+    const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
         const choiceMap = [null, "Rock", "Paper", "Scissors"];
         [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
         const roundResult = document.querySelector(".results");
         roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`;
     }
 
-    const printGameWinner = (scoreCount) => {
+    const printGameWinner = () => {
+        const humanScore = getScore(human);
+        const computerScore = getScore(computer);
+
         const scoreAnnouncement = document.createElement("p");
         const finalResults = document.querySelector(".results");
-        if(scoreCount[0] > scoreCount[1]) {
+
+        if(humanScore > computerScore) {
             finalResults.textContent = `You're a winner! Maybe man will keep his dominion over machine for a couple more decades, after all.`;
-        } else if(scoreCount[1] > scoreCount[0]) {
+        } else if(computerScore > humanScore) {
             finalResults.textContent = `The computer said to tell you you're a dumb dumb loser...`
         } else {
             finalScores.textContent = `Damn, so you're really both as useless as each other... That's a tie!`
         }
     }
 
-    const printScores = (humanScore, computerScore) => {
+    const printScores = () => {
+        const humanScore = getScore(human);
+        const computerScore = getScore(computer);
+
         const humanTally = document.createElement("p");
         const computerTally = document.createElement("p");
+        
         humanTally.textContent = `Your score: ${humanScore}`;
         computerTally.textContent = `Computer score: ${computerScore}`;
         }
