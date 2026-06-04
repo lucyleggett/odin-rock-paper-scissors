@@ -49,14 +49,24 @@ function GameController() {
     const incrementRoundCount = () => { 
         getRoundCount();
         roundCount += 1;
-        return roundCount === 5;
     };
 
     let roundWinner;
     const getRoundWinner = () => roundWinner;
 
-    const playRound = () => {
-        const humanChoice = getHumanInput();
+    if (getRoundCount() < 5){
+        const rpsButtons = document.querySelectorAll(".rps");
+        const controller = new AbortController();
+        rpsButtons.forEach(button => {
+            button.addEventListener("click", (event) => {
+                let humanChoice = event.target.id;
+            }, { signal: controller.signal });
+        })
+    } else {
+        controller.abort();
+    }
+
+    const playRound = (humanChoice) => {
         const computerChoice = getComputerChoice();
         let roundWinner;
 
@@ -87,21 +97,6 @@ function GameController() {
 }
 
 function DomController() {
-    const getHumanInput = () => {
-        if (!roundCount()){
-            const rpsButtons = document.querySelectorAll(".rps");
-            const controller = new AbortController();
-            rpsButtons.forEach(button => {
-                button.addEventListener("click", (event) => {
-                    const humanChoice = event.target.id;
-                    return humanChoice;
-                }, { signal: controller.signal });
-            })
-        } else {
-            controller.abort();
-        }
-    }
-    
     const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
         const choiceMap = [null, "Rock", "Paper", "Scissors"];
         [computerChoice, humanChoice] = [choiceMap[computerChoice], choiceMap[humanChoice]];
@@ -131,7 +126,7 @@ function DomController() {
 
         const humanTally = document.createElement("p");
         const computerTally = document.createElement("p");
-        
+
         humanTally.textContent = `Your score: ${humanScore}`;
         computerTally.textContent = `Computer score: ${computerScore}`;
         }
