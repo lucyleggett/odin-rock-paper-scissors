@@ -15,8 +15,8 @@ Create updateDOM to manage the UI
 
 function Score() {
     const players = [
-        { name: human, score: 0, },
-        { name: computer, score: 0 },
+        { name: "human", score: 0, },
+        { name: "computer", score: 0 },
     ]
 
     const getScore = (player) => { 
@@ -54,10 +54,10 @@ function GameController() {
     const round = Round();
     const roundCount = round.getCount();
     const roundWinner = Score();
-    
+
+    const rpsButtons = document.querySelectorAll(".rps");
+    const controller = new AbortController();
     if (roundCount < 5){
-        const rpsButtons = document.querySelectorAll(".rps");
-        const controller = new AbortController();
         rpsButtons.forEach(button => {
             button.addEventListener("click", (event) => {
                 let humanChoice = event.target.id;
@@ -66,7 +66,7 @@ function GameController() {
         })
     } else {
         controller.abort();
-    }
+    };
 
     const getComputerChoice = () => {
         return Math.floor(Math.random() * (4 - 1) + 1);
