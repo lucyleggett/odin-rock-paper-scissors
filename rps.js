@@ -26,7 +26,7 @@ function Score() {
 
     const awardPoint = (roundWinner) => {
         if (roundWinner === "nobody...") return;
-        else if (roundWinner === "you!") players[0].score =+ 1;
+        else if (roundWinner === "you!") players[0].score += 1;
         else players[1].score += 1;
     }
     return { getScore, awardPoint };
@@ -42,9 +42,9 @@ function Round() {
 }
 
 function GameController() {
-    const dom = DomController();
     const round = Round();
     const score = Score();
+    const dom = DomController(score);
     const rpsButtons = document.querySelectorAll(".rps");
 
     rpsButtons.forEach(button => {
@@ -86,17 +86,15 @@ function GameController() {
     };
 }
 
-function DomController() {
-    const score = Score();
-
+function DomController(score) {
     const printRoundWinner = (computerChoice, humanChoice, roundWinner) => {
-        const roundResult = document.querySelector(".results");
+        const roundResult = document.querySelector(".round-result");
         roundResult.textContent = `The computer played ${computerChoice} and you played ${humanChoice}. This round goes to ${roundWinner}`;
     }
 
     const printGameWinner = () => {
-        const humanScore = getScore("human");
-        const computerScore = getScore("computer");
+        const humanScore = score.getScore("human");
+        const computerScore = score.getScore("computer");
 
         const finalResults = document.querySelector(".final-results");
 
