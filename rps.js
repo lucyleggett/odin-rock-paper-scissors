@@ -46,6 +46,8 @@ function Round() {
         getRoundCount();
         roundCount += 1;
     };
+
+    return { getCount, incrementCount };
 }
 
 function GameController() {
