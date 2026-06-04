@@ -13,12 +13,35 @@ Create function game, and within that:
 Create updateDOM to manage the UI
 */
 
-function gameController() {
-    let humanScore = 0;
-    let computerScore = 0;
+function Score() {
+    const players = [
+        { name: human, score: 0, },
+        { name: computer, score: 0 },
+    ]
+
+    const getScore = (player) => { 
+        const specificPlayer = players.find(player => player.name === player);
+        const specificScore = specificPlayer.score;
+    };
+
+    const awardPoint = (roundWinner) => {
+        if (roundWinner === "nobody...") return;
+        else if (roundWinner === "you!") {
+            getScore(human);
+            human.score += 1;
+        } else {
+            getScore(computer);
+            computer.score += 1;
+        }
+    }
+}
+
+function GameController() {
+    let roundWinner;
+    const getRoundWinner = () => roundWinner;
 
     const getComputerChoice = () => {
-        let computerChoiceNum = Math.floor(Math.random() * (4 - 1) + 1);
+        let computerChoice = Math.floor(Math.random() * (4 - 1) + 1);
         }
     
     const roundCount = () => { 
@@ -26,18 +49,8 @@ function gameController() {
         return roundCount === 5;
     };
 
-    const scoreCount = (roundWinner) => {
-        if (roundWinner === "nobody...") return;
-        else if (roundWinner === "you!") {
-            humanScore += 1;
-        } else {
-            computerScore += 1;
-        }
-        return [humanScore, computerScore];
-    }
-
     const playRound = (computerChoice, humanChoice) => {
-        let roundWinner;
+        getRoundWinner();
         if(humanChoice === computerChoice){
             roundWinner = "nobody...";
         } else if((computerChoice === 1 && humanChoice === 2)
@@ -50,16 +63,18 @@ function gameController() {
             roundWinner = "the computer.";
         }
         roundCount();
-        scoreCount(roundWinner);
+        Score(roundWinner);
         printRoundWinner(computerChoice, humanChoice, roundWinner);
         printScores(humanScore, computerScore);
 
         if (roundCount()) {
             printGameWinner(scoreCount);
         }
+
+        return {}
     }
 
-    return { getComputerChoice, getHumanChoice, roundCount, scoreCount };
+    return { GetRoundWinner, getComputerChoice, getHumanChoice, roundCount, scoreCount };
 }
 
 function domController() {
@@ -108,3 +123,5 @@ function domController() {
     return { getHumanInput, printRoundWinner, printGameWinner, printScores }
 
 }
+
+const game = 
